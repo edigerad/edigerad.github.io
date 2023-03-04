@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Жаңалықтар/Новости</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<style>
+    /* Set maximum height and width of images */
+    img {
+        max-width: 100px;
+        max-height: 100px;
+        object-fit: cover;
+    }
+
+    /* Style for search input and button */
+    .search-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .search-input {
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px 0 0 5px;
+        border: none;
+        width: 70%;
+    }
+
+    .search-button {
+        padding: 10px;
+        background: #2196f3;
+        color: white;
+        font-size: 16px;
+        border-radius: 0 5px 5px 0;
+        border: none;
+        cursor: pointer;
+        width: 30%;
+    }
+
+    /* Style for news articles */
+    .news-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin-top: 20px;
+    }
+
+    .news-item {
+        width: 300px;
+        margin: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+    .news-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .news-description {
+        font-size: 16px;
+        line-height: 1.5;
+        margin-bottom: 10px;
+    }
+
+    .news-link {
+        font-size: 16px;
+        color: #2196f3;
+        text-decoration: none;
+        display: block;
+        margin-top: 10px;
+    }
+</style>
+<body>
+<div class="container">
+    <h1 class="my-5">RSS News</h1>
+    <div class="form-group">
+        <label for="tags-input">Filter news by tags:</label>
+        <input type="text" id="tags-input" class="form-control" placeholder="Enter tags separated by comma">
+    </div>
+    <div class="form-group">
+        <button id="search-btn" class="btn btn-primary">Search</button>
+    </div>
+    <div class="row" id="news-container"></div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+    let rssLinks = [];
+    let filteredNews = [];
+
+    function parseRSS(url, callback) {
+        $.ajax({
+            url: "https://api.rss2json.com/v1/api.json",
+            method: "GET",
+            data: {
+                rss_url: url,
+                api_key: "acolw6gll4ylpkuf2ljsv3lbbejcoal7gotwttoj", // replace with your own API key
+                count: 100,
+            },
+            success: function (response) {
+                callback(response.items);
+            },
+        });
+    }
+
+    function renderNews(news) {
+        let newsHtml = "";
+        news.forEach(function (item) {
+            newsHtml += `<div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                          <div class="card-body">
+                            <h4><a href="${item.link}" target="_blank">${item.title}</a></h4>
+                            <p class="card-text">${item.description}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                              <small class="text-muted">${new Date(item.pubDate).toLocaleString()}</small>
+                            </div>
+                          </div>
+                        </div>
+                      </div>`;
+        });
+        $("#news-container").html(newsHtml);
+    }
+
+    function filterNewsByTags() {
+        const tagsInput = $("#tags-input").val();
+        const tags = tagsInput.split(",").map((tag) => tag.trim().toLowerCase());
+        filteredNews = [];
+        rssLinks.forEach(function (rssLink) {
+            parseRSS(rssLink, function (items) {
+                items.forEach(function (item) {
+                    const title = item.title.toLowerCase();
+                    const description = item.description.toLowerCase();
+                    if (tags.every((tag) => title.includes(tag) || description.includes(tag))) {
+                        filteredNews.push(item);
+                    }
+                });
+                renderNews(filteredNews);
+            });
+        });
+    }
+
+    function init() {
+        rssLinks = [
+            "https://rss.app/feeds/iICOSbCu1oKSJvAS.xml",
+            "https://rss.app/feeds/VDY1jYNQM60VW02s.xml",
+            "https://rss.app/feeds/LWgHTcqtrfgNutz2.xml",
+            "https://rss.app/feeds/mTt4Xm2ogbgQMDIA.xml",
+            "https://rss.app/feeds/msuqJWyGa5FWUKet.xml",
+            "https://rss.app/feeds/iw2NzFZHMFiVwZRE.xml",
+            "https://rss.app/feeds/EU9HhxGQdKDGnvTe.xml",
+            "https://rss.app/feeds/3CPCxD14tkTTecX9.xml",
+            "https://rss.app/feeds/JRieUECcrCSjR0CG.xml",
+            "https://rss.app/feeds/v5hCyZ7ri2EX6GDQ.xml",
+            
+        ];
+        filterNewsByTags();
+        $("#search-btn").on("click", filterNewsByTags);
+    }
+
+    $(document).ready(init);
+</script>
+</body>
+</html>
