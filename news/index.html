@@ -78,6 +78,108 @@
 <body>
 <div class="container">
     <h1 class="my-5">Жаңалықтар/Новости</h1>
+    <form id="checkbox-form">
+        <div class="form-group row">
+            <div class="col-md-2 mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="item1"
+                           value="https://rss.app/feeds/O0iorRgMF8lhuchQ.xml">
+                    <label class="form-check-label" for="item1">
+                        tengrinews.kz
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-2 mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="item2" value="https://rss.app/feeds/9XJWqk0F1RaMrkVg.xml">
+                    <label class="form-check-label" for="item2">informburo.kz
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-2 mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="item3" value="https://rss.app/feeds/xNM4jNNZzctAbLy4.xml">
+                    <label class="form-check-label" for="item3">
+                        inform.kz
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-2 mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="item4" value="https://rss.app/feeds/z3T4hCHKax8onNvQ.xml">
+                    <label class="form-check-label" for="item4">
+                        ktk.kz
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-2 mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="item5" value="https://rss.app/feeds/Xoy8xoM2zlKC0mIB.xml">
+                    <label class="form-check-label" for="item5">
+                        zakon.kz
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-2 mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="item6" value="https://rss.app/feeds/dVRwiKnCiOmDAWOG.xml">
+                    <label class="form-check-label" for="item6">
+                        azattyq.org
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-2 mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="item7" value="https://rss.app/feeds/xic3j5t6EC4hoClo.xml">
+                    <label class="form-check-label" for="item7">
+                        newtimes.kz
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-2 mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="item8" value="https://rss.app/feeds/ZFm1mG6r88jcjN1B.xml">
+                    <label class="form-check-label" for="item7">
+                        sputnik.kz
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-2 mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="item9" value="https://rss.app/feeds/vz5Z4ZntCoUVaEPD.xml">
+                    <label class="form-check-label" for="item7">
+                        ztb.kz
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-2 mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="item10" value="https://rss.app/feeds/Ub5ltyYCv9QsgC6z.xml">
+                    <label class="form-check-label" for="item7">
+                        ic24.kz
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-2 mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="item11" value="https://rss.app/feeds/NWUK1PMTmFyGCGQE.xml">
+                    <label class="form-check-label" for="item7">
+                        rus.azattyq.org
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-2 mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="item12" value="https://rss.app/feeds/XgmbXpi9FEYdQg71.xml">
+                    <label class="form-check-label" for="item7">
+                        kaz.tengrinews.kz
+                    </label>
+                </div>
+            </div>
+        </div>
+    </form>
     <p>tengrinews.kz|newtimes.kz|azattyq.org|sputnik.kz|ztb.kz|inform.kz|informburo.kz|zakon.kz|ktk.kz|ic24.kz</p>
     <div class="form-group">
         <label for="tags-input">Filter news by tags:</label>
@@ -147,15 +249,31 @@
         });
     }
 
+    const form = document.querySelector('#checkbox-form');
+
+    // Add an event listener to the form to listen for changes in the checkboxes
+    form.addEventListener('change', () => {
+        // Clear the current list of selected items
+        // list.innerHTML = '';
+        rssLinks = [];
+        // Loop through each checkbox in the form
+        form.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
+            // If the checkbox is checked, add its value to the list
+            if (checkbox.checked) {
+                rssLinks.push(checkbox.value);
+            }
+        });
+    });
+
     function init() {
         rssLinks = [
-            "https://rss.app/feeds/O0iorRgMF8lhuchQ.xml",
-            "https://rss.app/feeds/9XJWqk0F1RaMrkVg.xml",
-            "https://rss.app/feeds/xNM4jNNZzctAbLy4.xml", 
-            "https://rss.app/feeds/z3T4hCHKax8onNvQ.xml",
-            "https://rss.app/feeds/Xoy8xoM2zlKC0mIB.xml",
-            "https://rss.app/feeds/dVRwiKnCiOmDAWOG.xml",
-            
+            // "https://rss.app/feeds/O0iorRgMF8lhuchQ.xml",
+            // "https://rss.app/feeds/9XJWqk0F1RaMrkVg.xml",
+            // "https://rss.app/feeds/xNM4jNNZzctAbLy4.xml",
+            // "https://rss.app/feeds/z3T4hCHKax8onNvQ.xml",
+            // "https://rss.app/feeds/Xoy8xoM2zlKC0mIB.xml",
+            // "https://rss.app/feeds/dVRwiKnCiOmDAWOG.xml",
+
         ];
         filterNewsByTags();
         $("#search-btn").on("click", filterNewsByTags);
