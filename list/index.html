@@ -77,14 +77,3 @@
   </div>
 </body>
 </html>
-
-postgres=# create database cust_db with encoding='UTF-8' LC_CTYPE='en_US.UTF-8' LC_COLLATE='en_US.UTF-8' TEMPLATE=template0;
-CREATE DATABASE
-postgres=# create role cust_user with password 'cust_pass';
-CREATE ROLE
-postgres=# alter role cust_user login createdb;
-ALTER ROLE
-postgres=# grant all privileges on database cust_db to cust_user;
-GRANT
-
-ALTER DATABASE netbox OWNER TO netbox;
