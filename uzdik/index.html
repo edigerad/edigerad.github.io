@@ -5,7 +5,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
+        var attempts = 0;
+
         function generateRandomLetters() {
+            attempts = 0;
             var randomLetters = '';
             var numberOfLetters = Math.floor(Math.random() * 9) + 2; // Generate a random number between 2 and 10
             var possibleLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
@@ -17,6 +20,8 @@
 
             document.getElementById('randomLetters').innerHTML = randomLetters;
             document.getElementById('outputForm').style.display = 'block';
+            document.getElementById('tryAgain').style.display = 'none';
+            document.getElementById('result').innerHTML = '';
         }
 
         function calculateFactorial() {
@@ -28,12 +33,20 @@
                 factorial *= i;
             }
 
-            document.getElementById('result').innerHTML = factorial;
+            attempts++;
 
             if (input == factorial) {
                 document.getElementById('correctAnswer').style.display = 'block';
-            } else {
+                document.getElementById('outputForm').style.display = 'none';
+                document.getElementById('tryAgain').style.display = 'none';
+            } else if (attempts < 3) {
                 document.getElementById('wrongAnswer').style.display = 'block';
+                document.getElementById('tryAgain').style.display = 'block';
+            } else {
+                document.getElementById('correctAnswerWithFormula').style.display = 'block';
+                document.getElementById('outputForm').style.display = 'none';
+                document.getElementById('tryAgain').style.display = 'none';
+                document.getElementById('result').innerHTML = factorial;
             }
         }
     </script>
@@ -56,7 +69,17 @@
                 <div class="alert alert-success mt-3">Correct answer!</div>
             </div>
             <div id="wrongAnswer" style="display: none;">
-                <div class="alert alert-danger mt-3">Wrong answer! The correct answer is: <span id="result"></span></div>
+                <div class="alert alert-danger mt-3">Wrong answer! Please try again.</div>
+            </div>
+        </div>
+        <div id="tryAgain" style="display: none;">
+            <button class="btn btn-primary mt-3" onclick="generateRandomLetters()">Try Again
+            </button>
+        </div>
+        <div id="correctAnswerWithFormula" style="display: none;">
+            <div class="alert alert-danger mt-3">
+                Wrong answer! The correct answer is: <span id="result"></span><br>
+                Formula: n!
             </div>
         </div>
     </div>
