@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PANDA PRINT — Полиграфия в Астане | Печать, визитки, баннеры, фото на документы</title>
+    <meta name="description" content="PANDA PRINT — полиграфия и оперативная печать в Астане. Визитки, листовки, баннеры, фото на документы, дизайн макетов. Быстро, качественно, доступно.">
+    <meta property="og:title" content="PANDA PRINT — Полиграфия в Астане">
+    <meta property="og:description" content="Оперативная печать, визитки, баннеры, фото на документы и многое другое. Качество и скорость в центре Астаны.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="img.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --panda-orange: #F5A623;
+            --panda-dark: #1a1a1a;
+            --panda-gray: #f8f9fa;
+            --panda-white: #ffffff;
+            --panda-orange-light: #fef3e0;
+            --panda-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            --panda-shadow-hover: 0 16px 48px rgba(0,0,0,0.14);
+            --panda-radius: 16px;
+        }
+
+        * { font-family: 'Inter', sans-serif; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            color: var(--panda-dark);
+            overflow-x: hidden;
+        }
+
+        /* ── Navbar ── */
+        .navbar {
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+            padding: 12px 0;
+            transition: all 0.3s ease;
+        }
+        .navbar-brand img {
+            height: 44px;
+            border-radius: 8px;
+        }
+        .navbar-brand span {
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: var(--panda-dark);
+            margin-left: 10px;
+        }
+        .nav-link {
+            font-weight: 600;
+            color: var(--panda-dark) !important;
+            margin: 0 4px;
+            border-radius: 8px;
+            padding: 8px 14px !important;
+            transition: all 0.25s ease;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--panda-orange) !important;
+            background: var(--panda-orange-light);
+        }
+        .navbar-toggler { border: none; box-shadow: none !important; }
+
+        /* ── Hero ── */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 200%;
+            background: radial-gradient(ellipse, rgba(245,166,35,0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 60%;
+            height: 120%;
+            background: radial-gradient(ellipse, rgba(245,166,35,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-content { position: relative; z-index: 2; }
+        .hero h1 {
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            font-weight: 900;
+            color: var(--panda-white);
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+        .hero h1 .text-accent { color: var(--panda-orange); }
+        .hero p.lead {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.75);
+            max-width: 500px;
+            line-height: 1.7;
+        }
+        .hero-logo {
+            max-width: 420px;
+            width: 100%;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.3));
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-16px); }
+        }
+
+        .btn-panda {
+            background: var(--panda-orange);
+            color: var(--panda-dark);
+            font-weight: 700;
+            padding: 14px 32px;
+            border-radius: 12px;
+            border: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(245,166,35,0.35);
+        }
+        .btn-panda:hover {
+            background: #e6951a;
+            color: var(--panda-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(245,166,35,0.45);
+        }
+        .btn-outline-panda {
+            border: 2px solid rgba(255,255,255,0.3);
+            color: var(--panda-white);
+            font-weight: 700;
+            padding: 12px 32px;
+            border-radius: 12px;
+            background: transparent;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .btn-outline-panda:hover {
+            border-color: var(--panda-orange);
+            color: var(--panda-orange);
+            background: rgba(245,166,35,0.08);
+        }
+
+        /* ── Section styling ── */
+        section { padding: 100px 0; }
+
+        .section-title {
+            font-weight: 900;
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+            color: var(--panda-dark);
+        }
+        .section-subtitle {
+            color: #6c757d;
+            font-size: 1.1rem;
+            max-width: 560px;
+            margin: 0 auto 50px;
+        }
+
+        .section-divider {
+            width: 60px;
+            height: 4px;
+            background: var(--panda-orange);
+            border-radius: 4px;
+            margin: 16px auto 0;
+        }
+
+        /* ── About ── */
+        .about-section { background: var(--panda-white); }
+        .about-img-wrap {
+            background: var(--panda-orange);
+            border-radius: var(--panda-radius);
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .about-img-wrap img {
+            max-width: 280px;
+            width: 100%;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.15));
+        }
+        .about-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+        .about-feature i {
+            font-size: 1.3rem;
+            color: var(--panda-orange);
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+        .about-feature p { margin: 0; line-height: 1.6; }
+
+        /* ── Services ── */
+        .services-section { background: var(--panda-gray); }
+        .service-card {
+            background: var(--panda-white);
+            border-radius: var(--panda-radius);
+            padding: 36px 28px;
+            text-align: center;
+            box-shadow: var(--panda-shadow);
+            transition: all 0.35s ease;
+            border: 1px solid rgba(0,0,0,0.04);
+            height: 100%;
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--panda-shadow-hover);
+        }
+        .service-icon {
+            width: 68px;
+            height: 68px;
+            border-radius: 16px;
+            background: var(--panda-orange-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.8rem;
+            color: var(--panda-orange);
+            transition: all 0.3s ease;
+        }
+        .service-card:hover .service-icon {
+            background: var(--panda-orange);
+            color: var(--panda-white);
+        }
+        .service-card h5 {
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin-bottom: 10px;
+        }
+        .service-card p {
+            color: #6c757d;
+            font-size: 0.92rem;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* ── Why us ── */
+        .why-section { background: var(--panda-white); }
+        .why-card {
+            text-align: center;
+            padding: 40px 24px;
+            border-radius: var(--panda-radius);
+            transition: all 0.3s ease;
+        }
+        .why-card:hover { background: var(--panda-orange-light); }
+        .why-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--panda-orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: var(--panda-white);
+            box-shadow: 0 8px 24px rgba(245,166,35,0.3);
+        }
+        .why-card h5 { font-weight: 700; margin-bottom: 10px; }
+        .why-card p { color: #6c757d; font-size: 0.93rem; line-height: 1.6; }
+
+        /* ── Instagram ── */
+        .insta-section {
+            background: linear-gradient(135deg, var(--panda-dark) 0%, #2d2d2d 100%);
+            color: var(--panda-white);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .insta-section::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(245,166,35,0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .insta-section .section-title { color: var(--panda-white); }
+        .insta-handle {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--panda-orange);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+        .insta-handle:hover {
+            color: #e6951a;
+            transform: scale(1.03);
+        }
+        .insta-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            max-width: 600px;
+            margin: 30px auto 0;
+        }
+        .insta-placeholder {
+            aspect-ratio: 1;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.2);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .insta-placeholder:hover {
+            background: rgba(245,166,35,0.12);
+            border-color: rgba(245,166,35,0.3);
+            color: var(--panda-orange);
+        }
+
+        /* ── Contacts ── */
+        .contacts-section { background: var(--panda-gray); }
+        .contact-card {
+            background: var(--panda-white);
+            border-radius: var(--panda-radius);
+            padding: 32px;
+            box-shadow: var(--panda-shadow);
+            height: 100%;
+        }
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .contact-item:last-child { margin-bottom: 0; }
+        .contact-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--panda-orange-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--panda-orange);
+            flex-shrink: 0;
+        }
+        .contact-item h6 { font-weight: 700; margin-bottom: 4px; }
+        .contact-item p { margin: 0; color: #6c757d; line-height: 1.5; }
+        .contact-item a {
+            color: var(--panda-dark);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+        .contact-item a:hover { color: var(--panda-orange); }
+
+        .map-placeholder {
+            border-radius: var(--panda-radius);
+            overflow: hidden;
+            box-shadow: var(--panda-shadow);
+            height: 100%;
+            min-height: 360px;
+        }
+        .map-placeholder iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 360px;
+            border: none;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            background: var(--panda-dark);
+            color: rgba(255,255,255,0.6);
+            padding: 50px 0 30px;
+        }
+        .footer a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer a:hover { color: var(--panda-orange); }
+        .footer-brand {
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: var(--panda-white);
+        }
+        .footer-social a {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.06);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-right: 8px;
+            transition: all 0.3s ease;
+        }
+        .footer-social a:hover {
+            background: var(--panda-orange);
+            color: var(--panda-dark);
+        }
+
+        /* ── Floating buttons ── */
+        .floating-actions {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 1000;
+        }
+        .fab {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--panda-white);
+            text-decoration: none;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        .fab:hover {
+            transform: scale(1.1);
+            color: var(--panda-white);
+        }
+        .fab-phone { background: var(--panda-orange); }
+        .fab-whatsapp { background: #25d366; }
+        .fab-instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+
+        /* ── Scroll animations ── */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── Scroll to top ── */
+        .scroll-top {
+            position: fixed;
+            bottom: 28px;
+            left: 28px;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: var(--panda-dark);
+            color: var(--panda-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        .scroll-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .scroll-top:hover {
+            background: var(--panda-orange);
+            color: var(--panda-dark);
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 991px) {
+            .hero { min-height: auto; padding: 120px 0 80px; }
+            .hero-logo { max-width: 300px; margin: 40px auto 0; }
+            section { padding: 70px 0; }
+            .insta-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+        @media (max-width: 575px) {
+            .hero h1 { font-size: 2rem; }
+            .insta-grid { grid-template-columns: repeat(2, 1fr); }
+            .floating-actions { bottom: 20px; right: 20px; }
+            .fab { width: 50px; height: 50px; font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <img src="img.png" alt="PANDA PRINT">
+            <span>PANDA PRINT</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#hero">Главная</a></li>
+                <li class="nav-item"><a class="nav-link" href="#about">О нас</a></li>
+                <li class="nav-item"><a class="nav-link" href="#services">Услуги</a></li>
+                <li class="nav-item"><a class="nav-link" href="#why">Преимущества</a></li>
+                <li class="nav-item"><a class="nav-link" href="#instagram">Instagram</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contacts">Контакты</a></li>
+            </ul>
+            <a href="tel:+77082058929" class="btn btn-panda ms-lg-3 mt-2 mt-lg-0">
+                <i class="bi bi-telephone-fill me-2"></i>Позвонить
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 hero-content">
+                <p class="text-uppercase fw-bold mb-3" style="color: var(--panda-orange); letter-spacing: 3px; font-size: 0.85rem;">Полиграфия в Астане</p>
+                <h1>Печатаем <span class="text-accent">ярко</span>, быстро и&nbsp;с&nbsp;душой</h1>
+                <p class="lead mb-4">Визитки, баннеры, листовки, фото на документы и многое другое. Всё в одном месте — в центре города.</p>
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="tel:+77082058929" class="btn btn-panda">
+                        <i class="bi bi-telephone-fill me-2"></i>Позвонить
+                    </a>
+                    <a href="https://instagram.com/pandaprint_org" target="_blank" rel="noopener" class="btn btn-outline-panda">
+                        <i class="bi bi-instagram me-2"></i>Instagram
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center mt-5 mt-lg-0">
+                <img src="img.png" alt="PANDA PRINT — полиграфия в Астане" class="hero-logo">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About -->
+<section class="about-section" id="about">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-5 fade-up">
+                <div class="about-img-wrap">
+                    <img src="img.png" alt="PANDA PRINT">
+                </div>
+            </div>
+            <div class="col-lg-7 fade-up">
+                <p class="text-uppercase fw-bold mb-2" style="color: var(--panda-orange); letter-spacing: 2px; font-size: 0.85rem;">О компании</p>
+                <h2 class="section-title">Привет, дорогие друзья!</h2>
+                <p class="mb-4" style="color: #555; line-height: 1.8;">
+                    <strong>PANDA PRINT</strong> — это ваш надёжный партнёр в мире полиграфии. Мы находимся в самом центре Астаны и предлагаем полный спектр печатных услуг: от визиток и листовок до крупноформатных баннеров и фото на документы. Наша команда работает быстро, качественно и всегда с улыбкой.
+                </p>
+                <div class="about-feature">
+                    <i class="bi bi-check-circle-fill"></i>
+                    <p><strong>Современное оборудование</strong> — чёткая печать, яркие цвета, долговечный результат</p>
+                </div>
+                <div class="about-feature">
+                    <i class="bi bi-check-circle-fill"></i>
+                    <p><strong>Быстрое выполнение</strong> — большинство заказов готово в день обращения</p>
+                </div>
+                <div class="about-feature">
+                    <i class="bi bi-check-circle-fill"></i>
+                    <p><strong>Индивидуальный подход</strong> — поможем с дизайном и подготовкой макета</p>
+                </div>
+                <div class="about-feature">
+                    <i class="bi bi-check-circle-fill"></i>
+                    <p><strong>Удобно и доступно</strong> — центр города, понятные цены, без сюрпризов</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services -->
+<section class="services-section" id="services">
+    <div class="container">
+        <div class="text-center fade-up">
+            <p class="text-uppercase fw-bold mb-2" style="color: var(--panda-orange); letter-spacing: 2px; font-size: 0.85rem;">Что мы делаем</p>
+            <h2 class="section-title">Наши услуги</h2>
+            <p class="section-subtitle">Полный комплекс полиграфических услуг для бизнеса и личных нужд</p>
+            <div class="section-divider mb-5"></div>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-4 col-sm-6 fade-up">
+                <div class="service-card">
+                    <div class="service-icon"><i class="bi bi-printer-fill"></i></div>
+                    <h5>Полиграфия</h5>
+                    <p>Полный цикл полиграфических услуг для любых задач</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 fade-up">
+                <div class="service-card">
+                    <div class="service-icon"><i class="bi bi-lightning-fill"></i></div>
+                    <h5>Оперативная печать</h5>
+                    <p>Срочная печать документов, отчётов и презентаций</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 fade-up">
+                <div class="service-card">
+                    <div class="service-icon"><i class="bi bi-person-badge-fill"></i></div>
+                    <h5>Фото на документы</h5>
+                    <p>Фото на паспорт, удостоверение, визу — за 5 минут</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 fade-up">
+                <div class="service-card">
+                    <div class="service-icon"><i class="bi bi-globe-americas"></i></div>
+                    <h5>Фото на гринкарту</h5>
+                    <p>Профессиональное фото с соблюдением всех требований</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 fade-up">
+                <div class="service-card">
+                    <div class="service-icon"><i class="bi bi-credit-card-2-front-fill"></i></div>
+                    <h5>Визитки</h5>
+                    <p>Стильные визитки — ваше первое впечатление</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 fade-up">
+                <div class="service-card">
+                    <div class="service-icon"><i class="bi bi-file-earmark-richtext-fill"></i></div>
+                    <h5>Листовки и флаеры</h5>
+                    <p>Яркие листовки для рекламы и промо-акций</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 fade-up">
+                <div class="service-card">
+                    <div class="service-icon"><i class="bi bi-easel-fill"></i></div>
+                    <h5>Баннеры</h5>
+                    <p>Наружная и интерьерная печать любых размеров</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 fade-up">
+                <div class="service-card">
+                    <div class="service-icon"><i class="bi bi-image-fill"></i></div>
+                    <h5>Печать фото</h5>
+                    <p>Фотографии от 10×15 до постеров на любых носителях</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 fade-up">
+                <div class="service-card">
+                    <div class="service-icon"><i class="bi bi-palette-fill"></i></div>
+                    <h5>Дизайн макетов</h5>
+                    <p>Разработка и подготовка макетов к печати</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 fade-up">
+                <div class="service-card">
+                    <div class="service-icon"><i class="bi bi-files"></i></div>
+                    <h5>Копирование</h5>
+                    <p>Копирование, сканирование и ламинирование</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 fade-up">
+                <div class="service-card">
+                    <div class="service-icon"><i class="bi bi-book-fill"></i></div>
+                    <h5>Брошюры и каталоги</h5>
+                    <p>Печать и переплёт буклетов, брошюр, каталогов</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 fade-up">
+                <div class="service-card">
+                    <div class="service-icon"><i class="bi bi-stickies-fill"></i></div>
+                    <h5>Наклейки и стикеры</h5>
+                    <p>Наклейки любых форм на виниле и бумаге</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why choose us -->
+<section class="why-section" id="why">
+    <div class="container">
+        <div class="text-center fade-up">
+            <p class="text-uppercase fw-bold mb-2" style="color: var(--panda-orange); letter-spacing: 2px; font-size: 0.85rem;">Почему мы</p>
+            <h2 class="section-title">Наши преимущества</h2>
+            <p class="section-subtitle">Мы стараемся, чтобы каждый клиент был доволен</p>
+            <div class="section-divider mb-5"></div>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg col-md-4 col-sm-6 fade-up">
+                <div class="why-card">
+                    <div class="why-icon"><i class="bi bi-stopwatch-fill"></i></div>
+                    <h5>Быстро</h5>
+                    <p>Большинство заказов выполняем в день обращения</p>
+                </div>
+            </div>
+            <div class="col-lg col-md-4 col-sm-6 fade-up">
+                <div class="why-card">
+                    <div class="why-icon"><i class="bi bi-award-fill"></i></div>
+                    <h5>Качественно</h5>
+                    <p>Современное оборудование и профессиональные материалы</p>
+                </div>
+            </div>
+            <div class="col-lg col-md-4 col-sm-6 fade-up">
+                <div class="why-card">
+                    <div class="why-icon"><i class="bi bi-geo-alt-fill"></i></div>
+                    <h5>Удобно</h5>
+                    <p>Мы в центре Астаны — легко найти и добраться</p>
+                </div>
+            </div>
+            <div class="col-lg col-md-4 col-sm-6 fade-up">
+                <div class="why-card">
+                    <div class="why-icon"><i class="bi bi-cash-coin"></i></div>
+                    <h5>Доступно</h5>
+                    <p>Честные цены без скрытых наценок и переплат</p>
+                </div>
+            </div>
+            <div class="col-lg col-md-4 col-sm-6 fade-up">
+                <div class="why-card">
+                    <div class="why-icon"><i class="bi bi-heart-fill"></i></div>
+                    <h5>С душой</h5>
+                    <p>Индивидуальный подход к каждому клиенту и проекту</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Instagram -->
+<section class="insta-section" id="instagram">
+    <div class="container position-relative">
+        <div class="fade-up">
+            <p class="text-uppercase fw-bold mb-2" style="color: var(--panda-orange); letter-spacing: 2px; font-size: 0.85rem;">Мы в соцсетях</p>
+            <h2 class="section-title">Следите за нами в Instagram</h2>
+            <p class="mb-4" style="color: rgba(255,255,255,0.6); max-width: 500px; margin: 0 auto;">
+                Примеры работ, акции, новинки и закулисье нашей работы — всё это в нашем Instagram
+            </p>
+            <a href="https://instagram.com/pandaprint_org" target="_blank" rel="noopener" class="insta-handle">
+                <i class="bi bi-instagram"></i> @pandaprint_org
+            </a>
+        </div>
+        <div class="insta-grid fade-up">
+            <div class="insta-placeholder"><i class="bi bi-image"></i></div>
+            <div class="insta-placeholder"><i class="bi bi-image"></i></div>
+            <div class="insta-placeholder"><i class="bi bi-image"></i></div>
+            <div class="insta-placeholder"><i class="bi bi-image"></i></div>
+            <div class="insta-placeholder"><i class="bi bi-image"></i></div>
+            <div class="insta-placeholder"><i class="bi bi-image"></i></div>
+            <div class="insta-placeholder"><i class="bi bi-image"></i></div>
+            <div class="insta-placeholder"><i class="bi bi-image"></i></div>
+        </div>
+        <div class="mt-4 fade-up">
+            <a href="https://instagram.com/pandaprint_org" target="_blank" rel="noopener" class="btn btn-panda">
+                <i class="bi bi-instagram me-2"></i>Подписаться
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Contacts -->
+<section class="contacts-section" id="contacts">
+    <div class="container">
+        <div class="text-center fade-up">
+            <p class="text-uppercase fw-bold mb-2" style="color: var(--panda-orange); letter-spacing: 2px; font-size: 0.85rem;">Свяжитесь с нами</p>
+            <h2 class="section-title">Контакты</h2>
+            <p class="section-subtitle">Приходите к нам или звоните — мы всегда рады помочь!</p>
+            <div class="section-divider mb-5"></div>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-5 fade-up">
+                <div class="contact-card">
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="bi bi-geo-alt-fill"></i></div>
+                        <div>
+                            <h6>Адрес</h6>
+                            <p>Проспект Абылай хана, 31<br>ТД «Встреча», 2 этаж, 5 бутик<br>Астана, Казахстан</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="bi bi-telephone-fill"></i></div>
+                        <div>
+                            <h6>Телефон</h6>
+                            <p><a href="tel:+77082058929">+7 (708) 205-89-29</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="bi bi-instagram"></i></div>
+                        <div>
+                            <h6>Instagram</h6>
+                            <p><a href="https://instagram.com/pandaprint_org" target="_blank" rel="noopener">@pandaprint_org</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="bi bi-whatsapp"></i></div>
+                        <div>
+                            <h6>WhatsApp</h6>
+                            <p><a href="https://wa.me/77082058929">Написать в WhatsApp</a></p>
+                        </div>
+                    </div>
+                    <div class="mt-4 d-flex flex-wrap gap-2">
+                        <a href="tel:+77082058929" class="btn btn-panda flex-fill">
+                            <i class="bi bi-telephone-fill me-2"></i>Позвонить
+                        </a>
+                        <a href="https://wa.me/77082058929" target="_blank" rel="noopener" class="btn btn-panda flex-fill" style="background: #25d366; box-shadow: 0 4px 16px rgba(37,211,102,0.35);">
+                            <i class="bi bi-whatsapp me-2"></i>WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7 fade-up">
+                <div class="map-placeholder">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2504.8!2d71.4307!3d51.1284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTHCsDA3JzQyLjIiTiA3McKwMjUnNTAuNSJF!5e0!3m2!1sru!2skz!4v1" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row g-4 align-items-center">
+            <div class="col-md-4">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <img src="img.png" alt="PANDA PRINT" style="height: 40px; border-radius: 8px;">
+                    <span class="footer-brand">PANDA PRINT</span>
+                </div>
+                <p class="mb-0" style="font-size: 0.9rem;">Полиграфия и оперативная печать<br>в центре Астаны</p>
+            </div>
+            <div class="col-md-4 text-md-center">
+                <div class="footer-social">
+                    <a href="https://instagram.com/pandaprint_org" target="_blank" rel="noopener" title="Instagram"><i class="bi bi-instagram"></i></a>
+                    <a href="https://wa.me/77082058929" target="_blank" rel="noopener" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+                    <a href="tel:+77082058929" title="Позвонить"><i class="bi bi-telephone-fill"></i></a>
+                </div>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <p class="mb-1" style="font-size: 0.9rem;">
+                    <a href="tel:+77082058929">+7 (708) 205-89-29</a>
+                </p>
+                <p class="mb-0" style="font-size: 0.85rem;">Пр. Абылай хана, 31, ТД «Встреча»</p>
+            </div>
+        </div>
+        <hr style="border-color: rgba(255,255,255,0.1); margin: 30px 0 20px;">
+        <p class="text-center mb-0" style="font-size: 0.85rem;">&copy; 2026 PANDA PRINT. Все права защищены.</p>
+    </div>
+</footer>
+
+<!-- Floating action buttons -->
+<div class="floating-actions">
+    <a href="tel:+77082058929" class="fab fab-phone" title="Позвонить"><i class="bi bi-telephone-fill"></i></a>
+    <a href="https://wa.me/77082058929" target="_blank" rel="noopener" class="fab fab-whatsapp" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+    <a href="https://instagram.com/pandaprint_org" target="_blank" rel="noopener" class="fab fab-instagram" title="Instagram"><i class="bi bi-instagram"></i></a>
+</div>
+
+<!-- Scroll to top -->
+<a href="#hero" class="scroll-top" id="scrollTop"><i class="bi bi-chevron-up"></i></a>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // ── Scroll-to-top button visibility ──
+    const scrollTopBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => {
+        scrollTopBtn.classList.toggle('show', window.scrollY > 400);
+    });
+
+    // ── Active nav link on scroll ──
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    function updateActiveNav() {
+        let current = '';
+        sections.forEach(section => {
+            const top = section.offsetTop - 120;
+            if (window.scrollY >= top) {
+                current = section.getAttribute('id');
+            }
+        });
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('active');
+            }
+        });
+    }
+    window.addEventListener('scroll', updateActiveNav);
+
+    // ── Close mobile menu on link click ──
+    const navCollapse = document.getElementById('navMenu');
+    document.querySelectorAll('#navMenu .nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            const bsCollapse = bootstrap.Collapse.getInstance(navCollapse);
+            if (bsCollapse) bsCollapse.hide();
+        });
+    });
+
+    // ── Fade-up animation on scroll ──
+    const fadeElements = document.querySelectorAll('.fade-up');
+
+    function checkFade() {
+        fadeElements.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight - 60) {
+                el.classList.add('visible');
+            }
+        });
+    }
+    window.addEventListener('scroll', checkFade);
+    window.addEventListener('load', checkFade);
+
+    // ── Navbar background change on scroll ──
+    const navbar = document.querySelector('.navbar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.style.boxShadow = '0 4px 24px rgba(0,0,0,0.1)';
+        } else {
+            navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.06)';
+        }
+    });
+</script>
+</body>
+</html>
