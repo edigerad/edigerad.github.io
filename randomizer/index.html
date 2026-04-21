@@ -55,6 +55,12 @@
             </div>
         </div>
 
+        <!-- View Toggle -->
+        <div class="btn-group w-100 mb-3" id="view-toggle" style="display:none;">
+            <button class="btn btn-outline-secondary active" onclick="setView('detailed', this)">Detailed (with scores)</button>
+            <button class="btn btn-outline-secondary" onclick="setView('summary', this)">Summary (totals only)</button>
+        </div>
+
         <!-- Results -->
         <div class="row g-3" id="results"></div>
     </div>
@@ -127,28 +133,63 @@
             }));
         }
 
+        let currentView = 'detailed';
+        let lastTeams = null;
+
+        function setView(view, btn) {
+            currentView = view;
+            document.querySelectorAll('#view-toggle .btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (lastTeams) renderTeams(lastTeams);
+        }
+
         function renderTeams(teams) {
+            lastTeams = teams;
+            document.getElementById('view-toggle').style.display = 'flex';
             const container = document.getElementById('results');
-            container.innerHTML = teams.map((team, i) => `
-                <div class="col-md-4">
-                    <div class="card team-card team-${i} h-100">
-                        <div class="card-body">
-                            <h5 class="team-header fw-bold mb-1">
-                                ${teamNames[i].emoji} ${teamNames[i].label}
-                            </h5>
-                            <div class="text-muted mb-3" style="font-size:.9rem">
-                                Total: ${team.total.toFixed(2)}
-                            </div>
-                            ${team.players.map(p => `
-                                <div class="player-row">
-                                    <span>${p.name}</span>
-                                    <span class="text-muted">${p.score.toFixed(2)}</span>
+
+            if (currentView === 'detailed') {
+                container.innerHTML = teams.map((team, i) => `
+                    <div class="col-md-4">
+                        <div class="card team-card team-${i} h-100">
+                            <div class="card-body">
+                                <h5 class="team-header fw-bold mb-1">
+                                    ${teamNames[i].emoji} ${teamNames[i].label}
+                                </h5>
+                                <div class="text-muted mb-3" style="font-size:.9rem">
+                                    Total: ${team.total.toFixed(2)}
                                 </div>
-                            `).join('')}
+                                ${team.players.map(p => `
+                                    <div class="player-row">
+                                        <span>${p.name}</span>
+                                        <span class="text-muted">${p.score.toFixed(2)}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
                         </div>
                     </div>
-                </div>
-            `).join('');
+                `).join('');
+            } else {
+                container.innerHTML = teams.map((team, i) => `
+                    <div class="col-md-4">
+                        <div class="card team-card team-${i} h-100">
+                            <div class="card-body">
+                                <h5 class="team-header fw-bold mb-1">
+                                    ${teamNames[i].emoji} ${teamNames[i].label}
+                                </h5>
+                                <div class="text-muted mb-3" style="font-size:.9rem">
+                                    Total: ${team.total.toFixed(2)}
+                                </div>
+                                ${team.players.map(p => `
+                                    <div class="player-row">
+                                        <span>${p.name}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
         }
     </script>
 </body>
